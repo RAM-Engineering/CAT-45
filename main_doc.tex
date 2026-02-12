@@ -348,7 +348,7 @@ p_c A_t = \dot{m} c^* = 39.952~\text{N}
 This relationship reveals that chamber pressure and throat area are not independent, i.e. once one is selected, the other is determined. The selection of chamber pressure therefore establishes the throat diameter through:
 
 \[
-A_t = \frac{39.952}{p_c}
+A_t = \frac{39.952 \text{ N}}{p_c}
 \]
 
 For a given required mass flow rate, \textit{higher} chamber pressure demands \textit{smaller} throat diameter, and vice versa. The optimal chamber pressure  must balance several competing factors:
@@ -373,40 +373,39 @@ The motor casing must safely contain the chamber pressure as a cylindrical press
 \sigma_{\text{hoop}} = \frac{p_c r_i}{t}
 \]
 
-where $r_i$ is the internal radius and $t$ is the wall thickness. For 4130 chromoly steel, a common material for rocket motor casings:
+where $r_i$ is the internal radius and $t$ is the wall thickness. For 6061-T6 Aluminum, a common material for rocket motor casings:
 \begin{itemize}
-\item Yield strength: $\sigma_y = 435$ MPa (63,000 psi)
-\item Ultimate tensile strength: $\sigma_{uts} = 560$ MPa (81,000 psi)
+\item Yield strength: $\sigma_y = 276$ MPa (40030 psi)
+\item Ultimate tensile strength: $\sigma_{uts} = 310$ MPa (44962 psi)
 \end{itemize}
+Al 6061-T6 is selected, both for these properties, and its ease of welding. Steel was also considered for it's strength and ease of welding. However, it was decided against as it releases fragments upon rupture. For this reason most rocketry organizations also ban steel casings on experimental motors. \\
 
 Applying a safety factor of 3 based on yield strength (conservative for 
 educational and first-motor applications):
 \[
-\sigma_{\text{design}} = \frac{\sigma_y}{3} = \frac{435}{3} = 145~\text{MPa}
+\sigma_{\text{design}} = \frac{\sigma_y}{3} = \frac{276 \text{ MPa}}{3} = 92~\text{MPa}
 \]
 
-Rearranging the hoop stress equation to solve for required wall thickness:
+Standard H-class motors use either 29 mm or 38 mm outer diameter casings. Since 320 Ns is the upper end of H-Class, a 38 mm outer diameter is selected. This sets the outer radius to 19 mm. Rearranging the hoop stress equation to solve for required wall thickness based on a set outer radius:
 \[
-t = \frac{p_c r_i}{\sigma_{\text{design}}}
+t = \frac{p_c r_o}{\sigma_{\text{design}}+p_c}
 \]
 
-For preliminary analysis, assume an internal diameter of approximately 
-44 mm (to be verified in Section 8 based on grain geometry), giving 
-$r_i = 22$ mm. At a chamber pressure of 500 psi (3.447 MPa):
+At a chamber pressure of 500 psi (3.447 MPa):
 \[
-t = \frac{3.447 \times 10^6 \times 0.022}{145 \times 10^6} = 0.52~\text{mm}
+t = \frac{3.447 \text{ MPa} \times 19 \text{mm}}{145 \text{ MPa} + 3.447\text{ MPa}} = 0.69~\text{mm}
 \]
 
 This represents the \textit{minimum} theoretical wall thickness. For practical design, accounting for manufacturing tolerances, weld quality variations, potential stress concentrations, and corrosion/erosion during combustion, a wall thickness of
 \[
 t_{\text{design}} = 2.0~\text{mm}
 \]
-is specified. This provides an effective safety factor of approximately 3.8 relative to the theoretical minimum, or a safety factor of 11.4 relative to material yield strength. At 2.0 mm wall thickness and 44 mm internal diameter, the actual hoop stress  during operation is:
+is specified. This provides an effective safety factor of approximately 2.9 relative to the theoretical minimum, or a safety factor of 8.7 relative to material yield strength. At 2.0 mm wall thickness and 38 mm external diameter, the actual hoop stress  during operation is:
 \[
-\sigma_{\text{actual}} = \frac{3.447 \times 10^6 \times 0.022}{0.002} = 37.9~\text{MPa}
+\sigma_{\text{actual}} = \frac{3.447 \text{ MPa} \times (19 \text{ mm} - 2 \text{ mm})}{2\text{ mm}} = 29.3~\text{MPa}
 \]
 
-This represents only 8.7\% of the yield strength, providing substantial margin for:
+This represents only 10.6\% of the yield strength, providing substantial margin for:
 \begin{itemize}
 \item Pressure transients during ignition (typically 10-20\% overpressure)
 \item Manufacturing defects or weld imperfections
@@ -462,27 +461,27 @@ p_{\text{max,transient}} = 1.20 \times 500 = 600~\text{psi} = 4.14~\text{MPa}
 
 At this transient pressure, the hoop stress in the 2.0 mm wall becomes:
 \[
-\sigma_{\text{transient}} = \frac{4.14 \times 10^6 \times 0.022}{0.002} = 45.5~\text{MPa}
+\sigma_{\text{transient}} = \frac{4.14 \text{ MPa} \times (19\text{ mm} - 2\text{ mm})}{2 \text{mm}} = 35.2~\text{MPa}
 \]
 
-This remains well below the design stress of 145 MPa (safety factor of 3.2) and represents only 10.5\% of material yield strength. The motor casing can therefore accommodate expected ignition transients with adequate margin. A common metric in solid rocket motor design is the burst pressure margin, defined as the ratio of predicted burst pressure to maximum expected operating pressure (MEOP). For the CAT-45 motor, \textit{Maximum Expected Operating Pressure:}
+This remains well below the design stress of 92 MPa (safety factor of 2.6) and represents only 12.7\% of material yield strength. The motor casing can therefore accommodate expected ignition transients with adequate margin. A common metric in solid rocket motor design is the burst pressure margin, defined as the ratio of predicted burst pressure to maximum expected operating pressure (MEOP). For the CAT-45 motor, \textit{Maximum Expected Operating Pressure:}
 
 \[
-\text{MEOP} = 1.20 \times 500 = 600~\text{psi}
+\text{MEOP} = 1.20 \times 500 \text{ psi} = 600~\text{psi}
 \]
 
 \textit{Predicted Burst Pressure:}
 Using ultimate tensile strength and assuming burst occurs at $\sigma = \sigma_{uts}$:
 \[
-p_{\text{burst}} = \frac{\sigma_{uts} \times t}{r_i} = \frac{560 \times 10^6 \times 0.002}{0.022} = 50.9~\text{MPa} = 7380~\text{psi}
+p_{\text{burst}} = \frac{\sigma_{uts} \times t}{r_i} = \frac{310 \text{ MPa} \times 2\text{ mm}}{(19 \text{ mm} - 2\text{ mm})} = 36.5~\text{MPa} = 5290~\text{psi}
 \]
 
 \textit{Burst Pressure Margin:}
 \[
-\text{Margin} = \frac{p_{\text{burst}}}{\text{MEOP}} = \frac{7380}{600} = 12.3
+\text{Margin} = \frac{p_{\text{burst}}}{\text{MEOP}} = \frac{5290 \text{ psi}}{600\text{ psi}} = 8.82
 \]
 
-This substantial margin accounts for material variability, weld defects, corrosion, and unforeseen operating conditions. For experimental motors, a burst pressure margin exceeding 4 is considered acceptable; CAT-45 exceeds this by a factor of three. During static test operations, chamber pressure must be continuously monitored via a pressure transducer (range: 0-1000 psi, accuracy: $\pm$1\% full scale) mounted in the forward closure. Real-time pressure data serves multiple purposes:
+This substantial margin accounts for material variability, weld defects, corrosion, and unforeseen operating conditions. For experimental motors, a burst pressure margin exceeding 4 is considered acceptable; CAT-45 doubles this. During static test operations, chamber pressure must be continuously monitored via a pressure transducer (range: 0-1000 psi, accuracy: $\pm$1\% full scale) mounted in the forward closure. Real-time pressure data serves multiple purposes:
 \begin{itemize}
 \item Verification of predicted operating pressure
 \item Detection of combustion instabilities or anomalies
